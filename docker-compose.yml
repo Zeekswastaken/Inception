@@ -1,0 +1,95 @@
+# version: '3'
+# services:
+#   nginx:
+#     container_name: nginx
+#     build: ./nginx/
+#     #image: nginx
+#     ports:
+#       - "443:443"
+#     networks:
+#        - private_net
+#     depends_on:
+#       - wordpress
+#     volumes:
+#       - var_wp:/var/www/html
+#     restart: unless-stopped
+#   db:
+#     container_name: mariadb
+#     image: mariadb:10.5
+#     #build: ./mariadb/
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: db
+#       MYSQL_USER: user
+#       MYSQL_PASSWORD: root
+#     ports:
+#       - "3306:3306"
+#     networks:
+#        - private_net
+#     restart: always
+#   wordpress:
+#     container_name: wordpress
+#     image: wordpress:php8.1-fpm-alpine
+#     #build: ./wordpress/
+#     networks:
+#       - private_net
+#     ports:
+#      - "9000:9000"
+#     volumes:
+#       - var_wp:/var/www/html
+#     restart: always
+# volumes:
+#   var_wp:
+
+
+# networks:
+#       private_net:
+version: "3.6"
+
+services:
+       wordpress:
+              container_name: wordpress
+              build: ./wordpress/ 
+              #image: wordpress:php8.2-fpm-alpine
+              restart: always
+              networks:
+                    - private_net
+              ports:
+                    - "9000:9000"
+              volumes:
+                      - wp_data:/var/www/html
+              depends_on:
+                  - db
+       mariadb:
+              container_name: mariadb
+              #build: ./requirements/mariadb/ 
+              image: mariadb
+              networks:
+                    - private_net
+              restart: always
+              ports:
+                    - "3306:3306"
+              environment:
+                MYSQL_ROOT_PASSWORD: root
+                MYSQL_DATABASE: db
+                MYSQL_USER: user
+                MYSQL_PASSWORD: root
+       nginx:
+              container_name: nginx
+              build: ./nginx/ 
+              #image: nginx
+              networks:
+                    - private_net
+              restart: unless-stopped
+              ports:
+                      - "443:443"
+              volumes:
+                       - wp_data:/var/www/html
+              depends_on:
+                  - wordpress
+
+volumes:
+        wp_data:
+
+networks:
+      private_net:
