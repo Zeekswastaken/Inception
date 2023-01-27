@@ -1,12 +1,12 @@
 re:
 	@docker-compose -f ./srcs/docker-compose.yml build
 up:
-	@docker-compose -f ./srcs/docker-compose.yml up -d --build
+	@docker-compose -f ./srcs/docker-compose.yml up --build
 down:
 	@docker-compose -f ./srcs/docker-compose.yml down
 
 clean:
-	@docker stop $$(docker ps -qa); docker rm $$(docker ps -qa); docker rmi -f $$(docker images -qa);
+	@docker ps -aq | xargs docker rm -fv && docker volume ls -q | xargs docker volume rm 
 
 fclean: down
-	@docker stop $$(docker ps -qa); docker rm $$(docker ps -qa); docker rmi -f $$(docker images -qa);
+	@docker ps -aq | xargs docker rm -fv && docker volume ls -q | xargs docker volume rm 
