@@ -1,49 +1,3 @@
-# version: '3'
-# services:
-#   nginx:
-#     container_name: nginx
-#     build: ./nginx/
-#     #image: nginx
-#     ports:
-#       - "443:443"
-#     networks:
-#        - private_net
-#     depends_on:
-#       - wordpress
-#     volumes:
-#       - var_wp:/var/www/html
-#     restart: unless-stopped
-#   db:
-#     container_name: mariadb
-#     image: mariadb:10.5
-#     #build: ./mariadb/
-#     environment:
-#       MYSQL_ROOT_PASSWORD: root
-#       MYSQL_DATABASE: db
-#       MYSQL_USER: user
-#       MYSQL_PASSWORD: root
-#     ports:
-#       - "3306:3306"
-#     networks:
-#        - private_net
-#     restart: always
-#   wordpress:
-#     container_name: wordpress
-#     image: wordpress:php8.1-fpm-alpine
-#     #build: ./wordpress/
-#     networks:
-#       - private_net
-#     ports:
-#      - "9000:9000"
-#     volumes:
-#       - var_wp:/var/www/html
-#     restart: always
-# volumes:
-#   var_wp:
-
-
-# networks:
-#       private_net:
 version: "3.6"
 
 services:
@@ -91,19 +45,19 @@ services:
 
 volumes:
         wp_data:
-            #     name: wordpress
-            #     driver: local
-            #     driver_opts:
-            #             device: /Users/zouazahr/Desktop/Inception/srcs/requirements/wordpress/vols
-            #             o: bind
-            #             type: none
+                  name: wordpress
+                  driver: local
+                  driver_opts:
+                          device: /home/zouazahr/vols/wordpress
+                          o: bind
+                          type: none
         db_data:
-            #     name: mariadb
-            #     driver: local
-            #     driver_opts:
-            #             device: /Users/zouazahr/Desktop/Inception/srcs/requirements/mariadb/vols
-            #             o: bind
-            #             type: none
+                 name: mariadb
+                 driver: local
+                 driver_opts:
+                         device: /home/zouazahr/vols/mariadb
+                         o: bind
+                         type: none
 
 networks:
       private_net:
