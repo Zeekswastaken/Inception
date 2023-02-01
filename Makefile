@@ -1,12 +1,12 @@
+all:
+	./srcs/requirements/mariadb/tools/vols.sh
+	@docker-compose -f ./srcs/docker-compose.yml build
 re:
-	@docker-compose -f ./srcs/docker-compose.yml build --no-cache
+	rm ~/vols
+	@docker-compose -f ./srcs/docker-compose.yml build
 up:
 	@docker-compose -f ./srcs/docker-compose.yml up
 down:
 	@docker-compose -f ./srcs/docker-compose.yml down
-
-clean:
-	@docker ps -aq | xargs docker rm -fv && docker volume ls -q | xargs docker volume rm 
-
 fclean: down
 	@docker ps -aq | xargs docker rm -fv && docker volume ls -q | xargs docker volume rm 
