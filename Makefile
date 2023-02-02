@@ -2,11 +2,11 @@ all:
 	./srcs/requirements/mariadb/tools/vols.sh
 	@docker-compose -f ./srcs/docker-compose.yml build
 re:
-	rm ~/vols
+	rm ~/$USER/vols
 	@docker-compose -f ./srcs/docker-compose.yml build
 up:
 	@docker-compose -f ./srcs/docker-compose.yml up
 down:
 	@docker-compose -f ./srcs/docker-compose.yml down
 fclean: down
-	@docker ps -aq | xargs docker rm -fv && docker volume ls -q | xargs docker volume rm 
+	@docker system prune -a --force
