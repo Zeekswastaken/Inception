@@ -9,4 +9,4 @@ down:
 	@docker-compose -f ./srcs/docker-compose.yml down
 fclean: down
 	@docker system prune -a --force
-	rm ~/vols
+	rm -rf ../../vols/db/ && rm -rf ../../vols/wp

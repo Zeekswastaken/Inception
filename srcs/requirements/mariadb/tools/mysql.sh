@@ -1,5 +1,5 @@
 #!/bin/sh
-service mysql start 
+service mysql start
 echo "CREATE DATABASE IF NOT EXISTS db ;" > db1.sql
 echo "CREATE USER IF NOT EXISTS 'zouazahr'@'%' IDENTIFIED BY 'Testing2' ;" >> db1.sql
 echo "GRANT ALL PRIVILEGES ON db.* TO 'zouazahr'@'%' ;" >> db1.sql
