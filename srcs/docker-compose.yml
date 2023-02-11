@@ -3,7 +3,7 @@ version: "3.6"
 services:
        wordpress:
               container_name: wordpress
-              build: ./requirements/wordpress/
+              build: ./requirements/wordpress/ 
               #image: wordpress:php8.2-fpm-alpine
               restart: always
               networks:
@@ -18,7 +18,7 @@ services:
                   - mariadb
        mariadb:
               container_name: mariadb
-              build: ./requirements/mariadb/
+              build: ./requirements/mariadb/ 
               #image: mariadb
               networks:
                     - private_net
@@ -31,7 +31,7 @@ services:
                  - db_data:/var/lib/mysql
        nginx:
               container_name: nginx
-              build: ./requirements/nginx/
+              build: ./requirements/nginx/ 
               #image: nginx
               networks:
                     - private_net
@@ -48,14 +48,14 @@ volumes:
                   name: wordpress
                   driver: local
                   driver_opts:
-                          device: /home/zouazahr/vols/wp
+                          device: /home/zouazahr/data/wp
                           o: bind
                           type: none
         db_data:
                  name: mariadb
                  driver: local
                  driver_opts:
-                         device: /home/zouazahr/vols/db
+                         device: /home/zouazahr/data/db
                          o: bind
                          type: none
 

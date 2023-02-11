@@ -5,4 +5,5 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 EXPOSE	3306
 COPY	./tools/mysql.sh /etc/mysql.sh
 RUN 	chmod +x /etc/mysql.sh
-CMD ["/etc/mysql.sh"]
+RUN     ./etc/mysql.sh
+CMD ["mysqld"]
